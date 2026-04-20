@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -11,9 +11,10 @@ import {
   Zap,
   ShieldCheck,
   ArrowRight,
-  Utensils,
 } from "lucide-react";
 import heroImage from "@/assets/hero-predictor.jpg";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,8 +28,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ForecastBite — AI Food Delivery Demand Predictor" },
       {
         property: "og:description",
-        content:
-          "Hyper-accurate AI demand forecasting for restaurants and delivery platforms.",
+        content: "Hyper-accurate AI demand forecasting for restaurants and delivery platforms.",
       },
     ],
   }),
@@ -38,32 +38,11 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
-        <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[image:var(--gradient-primary)] shadow-[var(--shadow-glow)]">
-              <Utensils className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-lg font-bold tracking-tight">ForecastBite</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-            <a href="#how" className="hover:text-foreground transition-colors">How it works</a>
-            <a href="#stats" className="hover:text-foreground transition-colors">Results</a>
-          </nav>
-          <Button variant="default" className="bg-[image:var(--gradient-primary)] text-primary-foreground hover:opacity-90 shadow-[var(--shadow-glow)] border-0">
-            Request demo
-          </Button>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{ background: "var(--gradient-hero)" }}
-        />
+        <div className="absolute inset-0 opacity-40" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-primary/20 blur-[120px]" />
         <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-accent/15 blur-[120px]" />
 
@@ -84,13 +63,17 @@ function Index() {
               ForecastBite uses AI to predict food delivery demand by hour, zone, and weather — so kitchens prep smart, riders move fast, and customers never wait.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button size="lg" className="bg-[image:var(--gradient-primary)] text-primary-foreground hover:opacity-90 shadow-[var(--shadow-glow)] border-0 group">
-                Start forecasting
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-border bg-card/40 backdrop-blur hover:bg-card">
-                See live demo
-              </Button>
+              <Link to="/predictor">
+                <Button size="lg" className="bg-[image:var(--gradient-primary)] text-primary-foreground hover:opacity-90 shadow-[var(--shadow-glow)] border-0 group">
+                  Try the predictor
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button size="lg" variant="outline" className="border-border bg-card/40 backdrop-blur hover:bg-card">
+                  Request demo
+                </Button>
+              </Link>
             </div>
             <div className="flex gap-8 pt-4 text-sm">
               <div>
@@ -209,32 +192,24 @@ function Index() {
             Ready to serve demand before it arrives?
           </h2>
           <p className="text-lg text-muted-foreground">
-            Join leading restaurants and delivery platforms forecasting smarter with ForecastBite.
+            Try our live AI predictor or request a personalized demo.
           </p>
           <div className="flex justify-center gap-3 pt-2">
-            <Button size="lg" className="bg-[image:var(--gradient-primary)] text-primary-foreground hover:opacity-90 shadow-[var(--shadow-glow)] border-0">
-              Request demo
-            </Button>
-            <Button size="lg" variant="outline" className="border-border bg-card/40 hover:bg-card">
-              Talk to sales
-            </Button>
+            <Link to="/predictor">
+              <Button size="lg" className="bg-[image:var(--gradient-primary)] text-primary-foreground hover:opacity-90 shadow-[var(--shadow-glow)] border-0">
+                Try predictor
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button size="lg" variant="outline" className="border-border bg-card/40 hover:bg-card">
+                Talk to sales
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      <footer className="border-t border-border py-8">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Utensils className="h-4 w-4 text-primary" />
-            <span>© 2026 ForecastBite. All rights reserved.</span>
-          </div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground">Privacy</a>
-            <a href="#" className="hover:text-foreground">Terms</a>
-            <a href="#" className="hover:text-foreground">Contact</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
